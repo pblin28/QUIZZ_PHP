@@ -28,7 +28,39 @@ foreach ($questions as $question) {
 
 // Bouton de validation
 echo '<input type="submit" value="Valider">';
-echo '</form>';
+echo '</form>';g
+$cpt=0;
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Traite les réponses ici
+    foreach ($questions as $question) {
+        $uuid = $question->getUuid();
+        if ($question->getCorrectAnswer() == $_POST[$uuid]){
+            $cpt+=1;
+        }
+
+
+    }
+    echo '<p> vous avez ';
+    echo $cpt; 
+    echo ' Réponses correctes</p>';
+}
+// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+//     // Traite les réponses ici
+//     var_dump($_POST);
+//     foreach ($questions as $question) {
+//         $uuid = $question->getUuid();
+//         if ($question instanceof RadioQuestions) {
+//             // Pour les questions de type radio
+//             $answer = isset($_POST[$uuid]) ? $_POST[$uuid] : null;
+//             // Traitez la réponse (enregistrez-la dans la base de données, par exemple)
+//             // ...
+//         } elseif ($question instanceof TextField) {
+//             // Pour les questions de type texte
+//             $answer = isset($_POST[$uuid]) ? $_POST[$uuid] : null;
+//         }
+//         var_dump($answer);
+//     }
+// }
 // Traite la réponse...
 ?>
