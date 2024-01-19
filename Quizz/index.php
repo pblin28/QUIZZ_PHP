@@ -18,17 +18,53 @@ foreach ($jsonData as $data) {
     }
 }
 
-// Affiche le formulaire
-echo "<h1>Répondez aux questions</h1>";
-echo '<form method="post" action="">';
+// Traite la réponse
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $score = 0;
+    $correctQuestions = array(); // Tableau pour stocker les questions correctes
 
-foreach ($questions as $question) {
-    $question->display();
+    foreach ($questions as $question) {
+        $reponse_utilisateur = isset($_POST[$question->getLabel()]) ? $_POST[$question->getLabel()] : null;
+
+        if ($question instanceof RadioQuestions) {
+            if ($reponse_utilisateur === $question->getCorrectAnswer()) {
+                $score++;
+                $correctQuestions[] = $question; // Ajoute la question correcte au tableau
+            }
+        } elseif ($question instanceof TextField) {
+            if (strtolower($reponse_utilisateur) === strtolower($question->getCorrectAnswer())) {
+                $score++;
+                $correctQuestions[] = $question; // Ajoute la question correcte au tableau
+            }
+        }
+    }
 }
 
-// Bouton de validation
-echo '<input type="submit" value="Valider">';
-echo '</form>';
-
-// Traite la réponse...
 ?>
+
+<h1>Répondez aux questions</h1>
+
+<form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+    <?php foreach ($questions as $question): ?>
+        <?php $question->display(); ?>
+    <?php endforeach; ?>
+
+    <input type="hidden" name="score" value="0">
+    <input type="submit" value="Valider">
+</form>
+
+<!-- Afficher le score et la liste des questions correctes après la soumission du formulaire -->
+<?php if ($_SERVER['REQUEST_METHOD'] === 'POST'): ?>
+    <p>Votre score est : <?php echo $score; ?></p>
+
+    <?php if ($score > 0): ?>
+        <h2>Questions correctes :</h2>
+        <ul>
+            <?php foreach ($correctQuestions as $correctQuestion): ?>
+                <li><?php echo $correctQuestion->getLabel(); ?></li>
+            <?php endforeach; ?>
+        </ul>
+    <?php else: ?>
+        <p>Aucune question correcte.</p>
+    <?php endif; ?>
+<?php endif; ?>
