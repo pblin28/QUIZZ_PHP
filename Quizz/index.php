@@ -28,7 +28,7 @@ foreach ($questions as $question) {
 
 // Bouton de validation
 echo '<input type="submit" value="Valider">';
-echo '</form>';g
+echo '</form>';
 $cpt=0;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
