@@ -1,8 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Votre Titre</title>
+    <link rel="stylesheet" type="text/css" href="../Static/style.css">
+</head>
+<body>
+
+<nav>
+    <h1>Quizz</h1>
+</nav>
+
 <?php
 
 require_once('../AutoLoad/auto-loader.php');
 require_once('../Questions/RadioQuestions.php');
 require_once('../Questions/TextField.php');
+require_once('../Static/style.css');
 
 // Charger le fichier JSON
 $jsonData = json_decode(file_get_contents('../Model/model.json'), true);
@@ -18,16 +33,14 @@ foreach ($jsonData as $data) {
     }
 }
 
-// Affiche le formulaire
-echo "<h1>Répondez aux questions</h1>";
+//Aficher le formulaire
 echo '<form method="post" action="">';
 
 foreach ($questions as $question) {
     $question->display();
 }
 
-// Bouton de validation
-echo '<input type="submit" value="Valider">';
+
 echo '</form>';
 $cpt=0;
 
@@ -41,9 +54,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
     }
-    echo '<p> vous avez ';
-    echo $cpt; 
-    echo ' Réponses correctes</p>';
 }
 // if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 //     // Traite les réponses ici
@@ -64,3 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // }
 // Traite la réponse...
 ?>
+<input type="submit" value="Valider">
+<p>Vous avez <?php echo $cpt; ?> réponses correctes</p>
+</body>
+</html>
