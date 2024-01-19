@@ -17,7 +17,7 @@ class RadioQuestions extends Question {
         echo "<h2>{$this->getLabel()}</h2>";
         echo "<ul>";
         foreach ($this->choices as $choice) {
-            echo "<li><input type='radio' name='{$this->getLabel()}' value='$choice'>$choice</li>";
+            echo "<li><input type='radio' name='{$this->getUuid()}' value='$choice'>$choice</li>";
         }
         echo "</ul>";
         echo "</div>";
