@@ -12,6 +12,9 @@ abstract class Question {
     public function getLabel() {
         return $this->label;
     }
+    public function getUuid() {
+        return $this->uuid;
+    }
 
     abstract public function display();
 }
