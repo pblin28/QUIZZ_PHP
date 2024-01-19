@@ -5,7 +5,9 @@ body, h1 {
     top: 0%;
 }
 
-
+.result{
+    text-align: center;
+}
 nav {
     background-color: #3498db;
     padding: 10px 0;
@@ -71,6 +73,7 @@ input[type="submit"] {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    width: 100%;
 }
 
 </style>

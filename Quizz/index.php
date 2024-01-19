@@ -40,7 +40,8 @@ foreach ($questions as $question) {
     $question->display();
 }
 
-
+// Bouton de validation
+echo '<input type="submit" class ="result" value="Valider">';
 echo '</form>';
 $cpt=0;
 
@@ -74,7 +75,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // }
 // Traite la réponse...
 ?>
-<input type="submit" value="Valider">
+<div class='result'>
 <p>Vous avez <?php echo $cpt; ?> réponses correctes</p>
+</div>
 </body>
 </html>
