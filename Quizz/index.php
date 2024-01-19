@@ -29,7 +29,7 @@ foreach ($jsonData as $data) {
     if ($data['type'] === 'radio') {
         $questions[] = new RadioQuestions($data['uuid'], $data['label'], $data['choices'], $data['correct']);
     } elseif ($data['type'] === 'text') {
-        $questions[] = new TextField($data['uuid'], $data['label']);
+        $questions[] = new TextField($data['uuid'], $data['label'],$data['correct']);
     }
 }
 
