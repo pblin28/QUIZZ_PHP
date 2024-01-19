@@ -20,5 +20,11 @@
             "Answer 3"
         ],
         "correct": "Answer 3"
+    },
+    {
+        "uuid":"8030a37e-947b-11ee-b9d1-0242ab11001",
+        "type": "text",
+        "label": "Quelle est le nombre de dizaine dans 342.",
+        "correct": "4"
     }
 ]
