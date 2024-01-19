@@ -1,0 +1,31 @@
+drop table if exists CORRECT_ANSWER;
+drop table if exists ANSWER;
+drop table if exists QUESTION;
+drop table if exists USER;
+
+CREATE TABLE IF NOT EXISTS 'QUESTION' (
+    'idq' INTEGER PRIMARY KEY AUTOINCREMENT,
+    'intitule' TEXT NOT NULL,
+    'ida' INTEGER NOT NULL,
+    
+    FOREIGN KEY('ida') REFERENCES 'ANSWER'('ida')
+);
+CREATE TABLE IF NOT EXISTS 'CORRECT_ANSWER'(
+    'idca' INTEGER PRIMARY KEY AUTOINCREMENT,
+    'question_id' INTEGER NOT NULL,
+    'answer_id' INTEGER NOT NULL,
+    FOREIGN KEY('question_id') REFERENCES 'QUESTION'('id'),
+    FOREIGN KEY('answer_id') REFERENCES 'ANSWER'('ida')
+);
+CREATE TABLE IF NOT EXISTS 'ANSWER'(
+    'ida' INTEGER PRIMARY KEY AUTOINCREMENT,
+    'intitule' TEXT NOT NULL,
+    'idq' INTEGER NOT NULL,
+    FOREIGN KEY('idq') REFERENCES 'QUESTION'('idq')
+);
+CREATE TABLE IF NOT EXISTS 'USER' (
+    'idu' INTEGER PRIMARY KEY AUTOINCREMENT,
+    'pseudo' TEXT NOT NULL,
+    'score' INTEGER NOT NULL
+);
+

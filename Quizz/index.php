@@ -26,20 +26,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     foreach ($questions as $question) {
         $reponse_utilisateur = isset($_POST[$question->getLabel()]) ? $_POST[$question->getLabel()] : null;
 
-        if ($question instanceof RadioQuestions) {
-            if ($reponse_utilisateur === $question->getCorrectAnswer()) {
-                $score++;
-                $correctQuestions[] = $question; // Ajoute la question correcte au tableau
-            }
-        } elseif ($question instanceof TextField) {
-            if (strtolower($reponse_utilisateur) === strtolower($question->getCorrectAnswer())) {
-                $score++;
-                $correctQuestions[] = $question; // Ajoute la question correcte au tableau
-            }
-        }
-    }
-}
 
+// Bouton de validation
+echo '<input type="submit" value="Valider">';
+echo '</form>';g
+$cpt=0;
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Traite les réponses ici
+    foreach ($questions as $question) {
+        $uuid = $question->getUuid();
+        if ($question->getCorrectAnswer() == $_POST[$uuid]){
+            $cpt+=1;
+        }
+
+
+    }
+    echo '<p> vous avez ';
+    echo $cpt; 
+    echo ' Réponses correctes</p>';
+}
 ?>
 
 <h1>Répondez aux questions</h1>
